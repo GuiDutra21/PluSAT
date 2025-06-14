@@ -9,7 +9,8 @@ void PreProcessing(Form* form){
 
 enum DecideState Decide(const Form* form)
 {
-
+    int *vsidsCount = calloc(form -> numVars + 1,sizeof(int));
+    int var;
     ClauseNode* list = form->clauses;
     while(list != NULL)
     {
@@ -18,6 +19,7 @@ enum DecideState Decide(const Form* form)
 
         for(int i = 0; i<clause->size; ++i)
         {
+            var = ((clause->literals[i] > 0 )? clause->literals[i] : -clause->literals[i]);
             LiteralId lit = clause->literals[i];
             lit = ((lit > 0 )? lit : -lit);
             if(getVarState(lit-1) == UNK)
@@ -83,4 +85,3 @@ int resolveConflict()
 
     return i+1;
 }
-

@@ -17,6 +17,7 @@ enum DecideState Decide(const Form* form)
 
         for(int i = 0; i<clause->size; ++i)
         {
+             printf("%d ",clause->literals[i]);
             LiteralId lit = clause->literals[i];
             lit = ((lit > 0 )? lit : -lit);
             if(getVarState(lit-1) == UNK)
